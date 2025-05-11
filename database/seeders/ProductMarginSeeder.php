@@ -23,11 +23,13 @@ class ProductMarginSeeder extends Seeder
             ],
             'Cooler' => [
                 ['min' => 1, 'max' => 10, 'company' => 20, 'distributor' => 8, 'shop' => 12],
-                ['min' => 11, 'max' => 50, 'company' => 18, 'distributor' => 10, 'shop' => 12],
+                ['min' => 6, 'max' => 20, 'company' => 20, 'distributor' => 12, 'shop' => 13],
+                ['min' => 21, 'max' => 100, 'company' => 18, 'distributor' => 10, 'shop' => 10],
             ],
             'Refrigerator' => [
                 ['min' => 1, 'max' => 5, 'company' => 21, 'distributor' => 11, 'shop' => 14],
-                ['min' => 6, 'max' => 30, 'company' => 19, 'distributor' => 12, 'shop' => 13],
+                ['min' => 6, 'max' => 20, 'company' => 20, 'distributor' => 12, 'shop' => 13],
+                ['min' => 21, 'max' => 100, 'company' => 18, 'distributor' => 10, 'shop' => 10],
             ],
         ];
 
