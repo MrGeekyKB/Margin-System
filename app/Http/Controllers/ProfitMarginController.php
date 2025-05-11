@@ -19,6 +19,7 @@ class ProfitMarginController extends Controller
         // Transform margins into required format for view
         $ranges = $margins->map(function ($margin) {
             return [
+                'id'          => $margin->id,
                 'min'         => $margin->min_quantity,
                 'max'         => $margin->max_quantity,
                 'company'     => $margin->company_margin,
@@ -35,18 +36,24 @@ class ProfitMarginController extends Controller
         $productId = $request->input('product_id');
 
         foreach ($request->input('ranges') as $range) {
-            ProductMargin::updateOrCreate(
-                [
-                    'product_id'   => $productId,
-                    'min_quantity' => $range['min'],
-                    'max_quantity' => $range['max'],
-                ],
-                [
+            if (! empty($range['id'])) {
+                ProductMargin::where('id', $range['id'])->update([
+                    'min_quantity'       => $range['min'],
+                    'max_quantity'       => $range['max'],
                     'company_margin'     => $range['company'],
                     'distributor_margin' => $range['distributor'],
                     'shop_margin'        => $range['shop'],
-                ]
-            );
+                ]);
+            } else {
+                ProductMargin::create([
+                    'product_id'         => $productId,
+                    'min_quantity'       => $range['min'],
+                    'max_quantity'       => $range['max'],
+                    'company_margin'     => $range['company'],
+                    'distributor_margin' => $range['distributor'],
+                    'shop_margin'        => $range['shop'],
+                ]);
+            }
         }
 
         return redirect()->back()->with('success', 'Margins saved successfully!');
